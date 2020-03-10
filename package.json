@@ -1,0 +1,58 @@
+{
+  "name": "@rodrigodevel/color",
+  "version": "0.0.1",
+  "description": "A small personal library meant for helping you handle and manipulate CSS color values in your JS app.",
+  "main": "dist/rodrigodevel-color.cjs.js",
+  "jsnext:main": "dist/rodrigodevel-color.esm.js",
+  "module": "dist/rodrigodevel-color.esm.js",
+  "browser": {
+    "./dist/rodrigodevel-color.esm.js": "./dist/rodrigodevel-color.browser.esm.js",
+    "./dist/rodrigodevel-color.cjs.js": "./dist/rodrigodevel-color.browser.cjs.js"
+  },
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RodrigoQuesadaDev/color.git"
+  },
+  "files": [
+    "/dist"
+  ],
+  "keywords": [
+    "css",
+    "color",
+    "hsl",
+    "hsla",
+    "rgb",
+    "rgba",
+    "css-in-js",
+    "styles"
+  ],
+  "author": "RodrigoDEV",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RodrigoQuesadaDev/color/issues"
+  },
+  "homepage": "https://github.com/RodrigoQuesadaDev/color",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-typescript": "^7.8.3",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-json": "^4.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@types/node": "^13.7.7",
+    "rollup": "^1.32.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-sourcemaps": "^0.5.0",
+    "rollup-plugin-typescript2": "^0.26.0",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
+  }
+}
