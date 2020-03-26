@@ -1,12 +1,19 @@
 import {MapProps, Writable} from './common/utility-types';
 
+type ChangeFn = (value: number, byAmount: number) => number;
+
+type PercentagePropertyDefinition = {
+    changeByFn: ChangeFn,
+    changeTowardByFn: ChangeFn
+};
+
 export abstract class Color<C extends Color<C, Data, PercentageData>, Data, PercentageData extends Partial<Data>> {
     readonly css: string;
 
     protected constructor(
         protected readonly data: Data,
         generateVal: () => string,
-        protected readonly percentageProperties: MapProps<PercentageData, { changeFn: (value: number, byAmount: number) => number }>
+        protected readonly percentageProperties: MapProps<PercentageData, PercentagePropertyDefinition>
     ) {
         this.css = generateVal();
     }
@@ -18,9 +25,17 @@ export abstract class Color<C extends Color<C, Data, PercentageData>, Data, Perc
     }
 
     changeValueBy(percentageAmount: Partial<PercentageData>): C {
-        let newData: Writable<Data> = {...this.data};
+        const newData: Writable<Data> = {...this.data};
         Object.keys(this.percentageProperties).forEach(prop => {
-            this.changePropertyBy(newData, prop as keyof PercentageData, percentageAmount, this.percentageProperties[prop as keyof PercentageData].changeFn);
+            this.changePropertyBy(newData, prop as keyof PercentageData, percentageAmount, this.percentageProperties[prop as keyof PercentageData].changeByFn);
+        });
+        return this.newInstance(newData);
+    }
+
+    changeValueTowardBy(percentageAmount: Partial<PercentageData>): C {
+        const newData: Writable<Data> = {...this.data};
+        Object.keys(this.percentageProperties).forEach(prop => {
+            this.changePropertyBy(newData, prop as keyof PercentageData, percentageAmount, this.percentageProperties[prop as keyof PercentageData].changeTowardByFn);
         });
         return this.newInstance(newData);
     }

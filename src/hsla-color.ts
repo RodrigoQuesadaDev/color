@@ -1,6 +1,11 @@
 import {Color} from './color';
 import {WithOptional} from './common/utility-types';
-import {changeHundredBasedPercentageValue, changeOneBasedPercentageValue} from './common/percentage-value-utils';
+import {
+    changeHundredBasedPercentageValueBy,
+    changeHundredBasedPercentageValueTowardBy,
+    changeOneBasedPercentageValueBy,
+    changeOneBasedPercentageValueTowardBy
+} from './common/percentage-value-utils';
 
 type Data = {
     readonly h: number,
@@ -20,9 +25,18 @@ export class HslaColor extends Color<HslaColor, Data, PercentageData> {
             {h, s, l, a},
             () => `hsla(${h}, ${s}%, ${l}%, ${a})`,
             {
-                s: {changeFn: changeHundredBasedPercentageValue},
-                l: {changeFn: changeHundredBasedPercentageValue},
-                a: {changeFn: changeOneBasedPercentageValue}
+                s: {
+                    changeByFn: changeHundredBasedPercentageValueBy,
+                    changeTowardByFn: changeHundredBasedPercentageValueTowardBy
+                },
+                l: {
+                    changeByFn: changeHundredBasedPercentageValueBy,
+                    changeTowardByFn: changeHundredBasedPercentageValueTowardBy
+                },
+                a: {
+                    changeByFn: changeOneBasedPercentageValueBy,
+                    changeTowardByFn: changeOneBasedPercentageValueTowardBy
+                }
             }
         );
     }

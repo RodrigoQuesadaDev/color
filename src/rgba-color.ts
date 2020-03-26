@@ -1,6 +1,9 @@
 import {Color} from './color';
 import {WithOptional} from './common/utility-types';
-import {changeHundredBasedPercentageValue} from './common/percentage-value-utils';
+import {
+    changeHundredBasedPercentageValueBy,
+    changeHundredBasedPercentageValueTowardBy
+} from './common/percentage-value-utils';
 
 type Data = {
     readonly r: number,
@@ -20,7 +23,10 @@ export class RgbaColor extends Color<RgbaColor, Data, PercentageData> {
             {r, g, b, a},
             () => `rgba(${r}, ${g}, ${b}, ${a})`,
             {
-                a: {changeFn: changeHundredBasedPercentageValue}
+                a: {
+                    changeByFn: changeHundredBasedPercentageValueBy,
+                    changeTowardByFn: changeHundredBasedPercentageValueTowardBy
+                }
             }
         );
     }
